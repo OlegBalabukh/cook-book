@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import ColoredSquare  from '../ColoredSquare/ColoredSquare';
-import NewRecipe from '../NewRecipe/NewRecipe';
+import InputForm from '../InputForm/InputForm';
 import './Recipe.css';
 
 const Recipe = () => {
@@ -14,6 +14,15 @@ const handleRecipe = () => {
 
 const onEdit = () => {
   setEdit(true)
+}
+
+const getEditedRecipe = (input) => {
+  console.log(input);
+  setEdit(false)
+}
+
+const getCancelConfirmation = () => {
+  setEdit(false)
 }
   
   return (   
@@ -46,7 +55,12 @@ const onEdit = () => {
                 <button className="btn btn-warning" onClick={ onEdit }>EDIT</button>
                 <button className="btn btn-danger">DELETE</button>
               </div>
-              { edit && <NewRecipe edit={edit}/>}
+              { edit && 
+              <InputForm 
+                edit={edit}
+                editedRecipe = {getEditedRecipe}
+                cancelConfirmation = {getCancelConfirmation}
+                />}
             </div>
           )}        
     </div>

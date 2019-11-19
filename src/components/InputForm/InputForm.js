@@ -8,40 +8,33 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import useStyles from '../../common/DialogForm.style';
 
-export default function NewRecipe(props) {
+export default function InputForm (props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [input, setInput] = React.useState({recipe: "", ingredients: "", id: ""});
+  //const [open, setOpen] = React.useState(false);
+  const [input, setInput] = React.useState({name: "", ingredients: "", id: ""});
 
   const handleRecipeName = ({target: { value } }) => {
-    setInput({...input, recipe: value });
+    setInput({...input, name: value });    
   };
 
   const handleIngredients = ({target: { value } }) => {
-    setInput({...input, ingredients: value, id: Date.now() });
+    setInput({...input, ingredients: value, id: Date.now() });    
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
+ const cancelEdit = () => {
+  props.cancelConfirmation() 
+
+ }
+
+  const handleEditedRecipe = () => {
+    props.editedRecipe(input)  
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleNewRecipe = () => {
-    setOpen(false);
-    console.log(input);
-  };
-
-  return (
-    <div>    
-      <Button onClick={ handleClickOpen }>Add new Recipe</Button>
+  return (    
       <Dialog 
         disableBackdropClick
         disableEscapeKeyDown 
-        open = { open }
-        onClose={ handleClose }
+        open = { props.edit }
       >
       <DialogTitle>Fill the form</DialogTitle>
       <DialogContent>
@@ -54,6 +47,7 @@ export default function NewRecipe(props) {
             fullWidth={false}
             autoComplete='off'
             onChange={handleRecipeName}
+            // inputRef
           />
           <TextField
             id="standard-basic"
@@ -67,14 +61,13 @@ export default function NewRecipe(props) {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={cancelEdit} color="primary">
           Close
         </Button>
-        <Button onClick={handleNewRecipe} color="primary">
+        <Button onClick={handleEditedRecipe} color="primary">
           add Recipe
         </Button>
       </DialogActions>
       </Dialog>
-    </div>
   );
 }
