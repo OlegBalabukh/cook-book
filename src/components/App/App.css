@@ -1,5 +1,6 @@
 .app {
   text-align: center;
+  background-color: white;
 }
 
 .app-header {
@@ -12,3 +13,24 @@
   font-size: calc(10px + 2vmin);
   color: white; */
 }
+
+.main {
+  margin:0 auto;
+  width: 90%;
+  min-width: 400px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;  
+  border: 3px solid green;
+}
+
+.section {
+  width: 45%;
+  min-width: 400px;
+  height: auto;
+  box-shadow: 0 0 4px gray;
+  margin: 20px;  
+}
+
+
+

@@ -1,0 +1,45 @@
+#oldVersions {
+  background-color: pink;
+  color: white;
+  margin-left: 5px;
+}
+
+.header {
+  height: 50px;
+  box-sizing: content-box;
+  display: flex;  
+  flex-direction: row;
+  border: 1px solid red;
+  cursor: pointer;
+}
+
+.recipeName {
+  padding: 13px 0 13px 0;
+  margin-left: 15px;
+}
+
+.date {
+  padding: 13px 0 13px 0;
+  margin-left: auto;
+  margin-right: 15px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.ingredients {
+  text-align: right;
+  margin-right: 15px;
+  padding-bottom: 15px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.btn-danger, .btn-warning {
+  display: inline;
+  color: white !important;
+  font-weight: bold;
+  margin-left: 15px;
+}
+

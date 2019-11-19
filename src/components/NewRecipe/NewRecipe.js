@@ -8,17 +8,17 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import useStyles from './NewRecipe.style';
 
-export default function NewRecipe() {
+export default function NewRecipe(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [input, setInput] = React.useState({recipe: "", ingredients: ""});
+  const [input, setInput] = React.useState({recipe: "", ingredients: "", id: ""});
 
   const handleRecipeName = ({target: { value } }) => {
     setInput({...input, recipe: value });
   };
 
   const handleIngredients = ({target: { value } }) => {
-    setInput({...input, ingredients: value });
+    setInput({...input, ingredients: value, id: Date.now() });
   };
 
   const handleClickOpen = () => {
@@ -36,11 +36,13 @@ export default function NewRecipe() {
 
   return (
     <div>
+    { !props.edit && (
       <Button onClick={ handleClickOpen }>Add new Recipe</Button>
+    )}
       <Dialog 
         disableBackdropClick
         disableEscapeKeyDown 
-        open = { open }
+        open = { props.edit || open }
         onClose={ handleClose }
       >
       <DialogTitle>Fill the form</DialogTitle>
@@ -54,6 +56,7 @@ export default function NewRecipe() {
             fullWidth={false}
             autoComplete='off'
             onChange={handleRecipeName}
+            // inputRef
           />
           <TextField
             id="standard-basic"
