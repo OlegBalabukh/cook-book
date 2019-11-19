@@ -9,12 +9,14 @@ import TextField from '@material-ui/core/TextField';
 import useStyles from '../../common/DialogForm.style';
 
 export default function NewRecipe(props) {
+  const { addRecipe } = props;
+  
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [input, setInput] = React.useState({recipe: "", ingredients: "", id: ""});
+  const [input, setInput] = React.useState({name: "", ingredients: "", id: ""});
 
   const handleRecipeName = ({target: { value } }) => {
-    setInput({...input, recipe: value });
+    setInput({...input, name: value });
   };
 
   const handleIngredients = ({target: { value } }) => {
@@ -31,12 +33,17 @@ export default function NewRecipe(props) {
 
   const handleNewRecipe = () => {
     setOpen(false);
-    console.log(input);
+    addRecipe(input);
   };
 
   return (
-    <div>    
-      <Button onClick={ handleClickOpen }>Add new Recipe</Button>
+    <div>
+      <Button
+        onClick={ handleClickOpen }
+        className={classes.newRecipeButton}
+      > 
+        Add new Recipe
+      </Button>
       <Dialog 
         disableBackdropClick
         disableEscapeKeyDown 

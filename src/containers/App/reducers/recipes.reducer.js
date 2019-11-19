@@ -1,10 +1,15 @@
+import { 
+  ADD_RECIPE
+} from '../constants'
+
 export const recipesReducer = (state = [], {type, payload}) => {
   switch(type) {
 
-    case "ADD_RECIPE":  
+    case ADD_RECIPE:
       return state.concat({
         id: payload.id,
-        recipeName: payload.name,
+        name: payload.name,
+        ingredients: payload.ingredients,
         date: new Date(payload.id).toString().substr(0, 24),
         isFocused: false,
         oldVersions: []

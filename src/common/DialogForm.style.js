@@ -19,5 +19,8 @@ export default makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 500,
+  },
+  newRecipeButton: {
+    margin: theme.spacing(2),
   }
 }));
