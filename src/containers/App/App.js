@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NewRecipe from '../NewRecipe/NewRecipe';
-import Recipe from '../Recipe/Recipe';
+import NewRecipe from '../../components/NewRecipe/NewRecipe';
+import Recipe from '../../components/Recipe/Recipe';
 import './App.css';
 
 function App() {

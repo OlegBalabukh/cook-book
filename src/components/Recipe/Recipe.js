@@ -6,7 +6,6 @@ import './Recipe.css';
 
 const Recipe = () => {
 const [ showRecipe, setShowRecipe ] = useState(false);
-
 const [ edit, setEdit ] = useState(false);
 
 const handleRecipe = () => {
