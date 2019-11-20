@@ -5,7 +5,8 @@ import InputForm from '../InputForm/InputForm';
 import './Recipe.css';
 
 const Recipe = (props) => {
-const { name, date, ingredients } = props.recipe;
+const { id, name, date, ingredients } = props.recipe;
+const { deleteRecipe } = props;
 
 const [ showRecipe, setShowRecipe ] = useState(false);
 const [ edit, setEdit ] = useState(false);
@@ -24,6 +25,10 @@ const getEditedRecipe = (input) => {
 
 const getCancelConfirmation = () => {
   setEdit(false)
+}
+
+const handleDelete = () => {
+  deleteRecipe(id)
 }
   
   return (   
@@ -52,7 +57,7 @@ const getCancelConfirmation = () => {
               </ul>              
               <div id="buttons">
                 <button className="btn btn-warning" onClick={ onEdit }>EDIT</button>
-                <button className="btn btn-danger">DELETE</button>
+                <button className="btn btn-danger" onClick={ handleDelete }>DELETE</button>
               </div>
               { edit && 
               <InputForm 

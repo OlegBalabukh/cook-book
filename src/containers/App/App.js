@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import NewRecipe from '../../components/NewRecipe/NewRecipe';
 import Recipe from '../../components/Recipe/Recipe';
 import { addRecipeAction } from "./actions/addRecipe.action";
+import { deleteRecipeAction } from "./actions/deleteRecipe.action";
 import './App.css';
 
-function App({ addRecipe, recipes }) {
+function App({ addRecipe, deleteRecipe, recipes }) {
   return (
     <div className="app">
       <header className="app-header">
@@ -18,7 +19,7 @@ function App({ addRecipe, recipes }) {
         <NewRecipe addRecipe={addRecipe} />
         {/*List <Recipe /> */}
         { recipes.length > 0 && recipes.map(recipe => {          
-          return <Recipe key={recipe.id} recipe={recipe} />   
+          return <Recipe key={recipe.id} recipe={recipe} deleteRecipe={deleteRecipe} />   
         })}
           
         </div>
@@ -37,7 +38,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addRecipe: (newRecipe) => { dispatch(addRecipeAction(newRecipe)); },
-  // deleteTask: (id) => { dispatch(deleteTaskAction(id)); },
+  deleteRecipe: (id) => { dispatch(deleteRecipeAction(id)); },
   // setActiveTask: (id) => { dispatch(setActiveTaskAction(id)); },
   // addComment: (comment) => { dispatch(addCommentAction(comment)); },
   // addTasksFromLocalStorage: (tasks) => { 

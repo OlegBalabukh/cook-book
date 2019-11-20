@@ -1,5 +1,6 @@
 import { 
-  ADD_RECIPE
+  ADD_RECIPE,
+  DELETE_RECIPE
 } from '../constants'
 
 export const recipesReducer = (state = [], {type, payload}) => {
@@ -15,7 +16,7 @@ export const recipesReducer = (state = [], {type, payload}) => {
         oldVersions: []
       });
 
-      case "DELETE_RECIPE":
+      case DELETE_RECIPE:
         return state.filter(recipe =>
           recipe.id !== payload );
 
