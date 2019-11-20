@@ -15,12 +15,17 @@ export default function NewRecipe(props) {
   const [open, setOpen] = React.useState(false);
   const [input, setInput] = React.useState({name: "", ingredients: "", id: ""});
 
+  const initErrorMessages = {name: false, ingredients: false};
+  const [error, setError] = React.useState(initErrorMessages);
+
   const handleRecipeName = ({target: { value } }) => {
     setInput({...input, name: value });
+    setError({...error, name: false});
   };
 
   const handleIngredients = ({target: { value } }) => {
     setInput({...input, ingredients: value, id: Date.now() });
+    setError({...error, ingredients: false})
   };
 
   const handleClickOpen = () => {
@@ -29,11 +34,24 @@ export default function NewRecipe(props) {
 
   const handleClose = () => {
     setOpen(false);
+    setError(initErrorMessages);
+  }; 
+
+  const handleErrors = () => {
+    input.name === ""
+      ? setError({...error, name: true})
+      : setError({...error, ingredients: true})
   };
 
-  const handleNewRecipe = () => {
-    setOpen(false);
-    addRecipe(input);
+  const handleNewRecipe = () => {    
+    const {name , ingredients} = input;
+
+    if (name === "" || ingredients === "") {
+      handleErrors();      
+    } else {
+      addRecipe(input);
+      handleClose();
+    }
   };
 
   return (
@@ -61,6 +79,8 @@ export default function NewRecipe(props) {
             fullWidth={false}
             autoComplete='off'
             onChange={handleRecipeName}
+            error={error.name }
+            helperText={error.name ? 'Empty field!' : ' '}
           />
           <TextField
             id="standard-basic"
@@ -70,6 +90,8 @@ export default function NewRecipe(props) {
             multiline={true}
             fullWidth={true}
             onChange={handleIngredients}
+            error={ error.ingredients }
+            helperText={ error.ingredients ? 'Empty field!' : ' '}
           />
         </form>
       </DialogContent>

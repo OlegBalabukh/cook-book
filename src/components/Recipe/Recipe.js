@@ -10,8 +10,6 @@ const { deleteRecipe, setActiveRecipe } = props;
 
 const [ edit, setEdit ] = useState(false);
 
-
-
 const onEdit = () => {
   setEdit(true)
 }
