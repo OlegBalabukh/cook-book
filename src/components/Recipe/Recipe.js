@@ -9,6 +9,7 @@ const { id, name, date, ingredients, isFocused } = props.recipe;
 const { deleteRecipe, setActiveRecipe } = props;
 
 const [ edit, setEdit ] = useState(false);
+const [ showIngredients, setShowIngredients ] = useState(false);
 
 const onEdit = () => {
   setEdit(true)
@@ -26,13 +27,19 @@ const handleDelete = () => {
   deleteRecipe(id)
 }
 
-const handleOnClick = () => {
-  setActiveRecipe(id)
+const handleShow = () => {
+  setActiveRecipe(id); 
+  
+  if (!isFocused && !showIngredients) {
+    setShowIngredients(true)    
+  } else if (isFocused === true) {
+    setShowIngredients(!showIngredients)
+  }  
 }
 
   return (   
     <div className="recipe" >
-        <div className="header" onClick={ handleOnClick }>               
+        <div className="header" onClick={ handleShow }>
           { isFocused && (
             <ColoredSquare width="5px" height="50px" color="#FF2C5F" />
           )}
@@ -42,14 +49,14 @@ const handleOnClick = () => {
            
           <div className="date"> {date} </div>
         </div>
-        { isFocused && ( 
+        { isFocused && showIngredients &&  ( 
             <div className="ingredients">
               <div>INGREDIENTS</div>
               <ul>
                 { ingredients.split(",").map((item, index) =>
                     <li key={index}>{ item }</li>)
                 }
-              </ul>              
+              </ul>
               <div id="buttons">
                 <button className="btn btn-warning" onClick={ onEdit }>EDIT</button>
                 <button className="btn btn-danger" onClick={ handleDelete }>DELETE</button>
@@ -61,7 +68,7 @@ const handleOnClick = () => {
                 cancelConfirmation = {getCancelConfirmation}
                 />}
             </div>
-          )}        
+          )}
     </div>
   )
 }

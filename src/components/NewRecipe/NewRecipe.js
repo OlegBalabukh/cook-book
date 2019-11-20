@@ -12,10 +12,11 @@ export default function NewRecipe(props) {
   const { addRecipe } = props;
   
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [input, setInput] = React.useState({name: "", ingredients: "", id: ""});
-
   const initErrorMessages = {name: false, ingredients: false};
+  const initInput = {name: "", ingredients: "", id: ""};
+
+  const [open, setOpen] = React.useState(false);
+  const [input, setInput] = React.useState(initInput);  
   const [error, setError] = React.useState(initErrorMessages);
 
   const handleRecipeName = ({target: { value } }) => {
@@ -35,6 +36,7 @@ export default function NewRecipe(props) {
   const handleClose = () => {
     setOpen(false);
     setError(initErrorMessages);
+    setInput(initInput);
   }; 
 
   const handleErrors = () => {
@@ -47,7 +49,8 @@ export default function NewRecipe(props) {
     const {name , ingredients} = input;
 
     if (name === "" || ingredients === "") {
-      handleErrors();      
+      handleErrors();
+      console.log('works'); 
     } else {
       addRecipe(input);
       handleClose();
