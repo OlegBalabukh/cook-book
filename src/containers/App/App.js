@@ -5,9 +5,11 @@ import NewRecipe from '../../components/NewRecipe/NewRecipe';
 import Recipe from '../../components/Recipe/Recipe';
 import { addRecipeAction } from "./actions/addRecipe.action";
 import { deleteRecipeAction } from "./actions/deleteRecipe.action";
+import { setActiveRecipeAction } from "./actions/setActiveRecipe.action.js";
+
 import './App.css';
 
-function App({ addRecipe, deleteRecipe, recipes }) {
+function App({ addRecipe, deleteRecipe, setActiveRecipe, recipes }) {
   return (
     <div className="app">
       <header className="app-header">
@@ -19,7 +21,14 @@ function App({ addRecipe, deleteRecipe, recipes }) {
         <NewRecipe addRecipe={addRecipe} />
         {/*List <Recipe /> */}
         { recipes.length > 0 && recipes.map(recipe => {          
-          return <Recipe key={recipe.id} recipe={recipe} deleteRecipe={deleteRecipe} />   
+          return (
+            <Recipe 
+              key={recipe.id}
+              recipe={recipe}
+              deleteRecipe={deleteRecipe}
+              setActiveRecipe={setActiveRecipe}
+            />  
+          ) 
         })}
           
         </div>
@@ -39,11 +48,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addRecipe: (newRecipe) => { dispatch(addRecipeAction(newRecipe)); },
   deleteRecipe: (id) => { dispatch(deleteRecipeAction(id)); },
-  // setActiveTask: (id) => { dispatch(setActiveTaskAction(id)); },
-  // addComment: (comment) => { dispatch(addCommentAction(comment)); },
-  // addTasksFromLocalStorage: (tasks) => { 
-  //   dispatch(addTasksFromLocalStorageAction(tasks));
-  // }
+  setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); }, 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

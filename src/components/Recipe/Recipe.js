@@ -5,15 +5,12 @@ import InputForm from '../InputForm/InputForm';
 import './Recipe.css';
 
 const Recipe = (props) => {
-const { id, name, date, ingredients } = props.recipe;
-const { deleteRecipe } = props;
+const { id, name, date, ingredients, isFocused } = props.recipe;
+const { deleteRecipe, setActiveRecipe } = props;
 
-const [ showRecipe, setShowRecipe ] = useState(false);
 const [ edit, setEdit ] = useState(false);
 
-const handleRecipe = () => {
-  setShowRecipe(!showRecipe);
-}
+
 
 const onEdit = () => {
   setEdit(true)
@@ -30,24 +27,24 @@ const getCancelConfirmation = () => {
 const handleDelete = () => {
   deleteRecipe(id)
 }
-  
-  return (   
-    <div className="recipe">
-        <div className="header" onClick={ handleRecipe }> 
 
-          <div id="redFocus">
-          { true && (
+const handleOnClick = () => {
+  setActiveRecipe(id)
+}
+
+  return (   
+    <div className="recipe" >
+        <div className="header" onClick={ handleOnClick }>               
+          { isFocused && (
             <ColoredSquare width="5px" height="50px" color="#FF2C5F" />
           )}
-
-        </div>
           <h6 className="recipeName"> { name }
             <p id="oldVersions" className="badge badge-pill">0</p>
           </h6>
            
           <div className="date"> {date} </div>
         </div>
-        { showRecipe && ( 
+        { isFocused && ( 
             <div className="ingredients">
               <div>INGREDIENTS</div>
               <ul>

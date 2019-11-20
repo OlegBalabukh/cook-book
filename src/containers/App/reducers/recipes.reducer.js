@@ -1,6 +1,7 @@
 import { 
   ADD_RECIPE,
-  DELETE_RECIPE
+  DELETE_RECIPE,
+  SET_ACTIVE_RECIPE
 } from '../constants'
 
 export const recipesReducer = (state = [], {type, payload}) => {
@@ -20,7 +21,7 @@ export const recipesReducer = (state = [], {type, payload}) => {
         return state.filter(recipe =>
           recipe.id !== payload );
 
-      case "SET_ACTIVE__RECIPE":
+      case SET_ACTIVE_RECIPE:
         return state.map(recipe => {
           recipe.id === payload
             ? recipe = {...recipe, isFocused: true}
