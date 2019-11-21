@@ -6,7 +6,7 @@ import './Recipe.css';
 
 const Recipe = (props) => {
 const { id, name, date, ingredients, isFocused } = props.recipe;
-const { deleteRecipe, setActiveRecipe } = props;
+const { deleteRecipe, setActiveRecipe, addRecipe, saveOldRecipeVersion, updateRecipe } = props;
 
 const [ edit, setEdit ] = useState(false);
 const [ showIngredients, setShowIngredients ] = useState(false);
@@ -15,8 +15,17 @@ const onEdit = () => {
   setEdit(true)
 }
 
-const getEditedRecipe = (input) => {
-  setEdit(false)
+const handleEditedRecipe = (edited) => {
+  setEdit(false);
+
+  if ( edited.id !== id ) {
+    addRecipe(edited);
+  } else if (edited.ingredients !== ingredients) {    
+    // add updated recipe && save old version
+    saveOldRecipeVersion(props.recipe)
+    updateRecipe(edited)
+    console.log('add updated recipe && save old version')
+  }
 }
 
 const getCancelConfirmation = () => {
@@ -62,9 +71,12 @@ const handleShow = () => {
                 <button className="btn btn-danger" onClick={ handleDelete }>DELETE</button>
               </div>
               { edit && 
-              <InputForm 
+              <InputForm                
+                id={id}
+                name={name}
                 edit={edit}
-                editedRecipe = {getEditedRecipe}
+                ingredients={ingredients}                
+                editedRecipe = {handleEditedRecipe}
                 cancelConfirmation = {getCancelConfirmation}
                 />}
             </div>

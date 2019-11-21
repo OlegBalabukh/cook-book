@@ -1,7 +1,9 @@
 import { 
   ADD_RECIPE,
   DELETE_RECIPE,
-  SET_ACTIVE_RECIPE
+  SET_ACTIVE_RECIPE,
+  UPDATE_RECIPE,
+  SAVE_OLD_RECIPE_VERSION
 } from '../constants'
 
 export const recipesReducer = (state = [], {type, payload}) => {
@@ -29,25 +31,37 @@ export const recipesReducer = (state = [], {type, payload}) => {
           return recipe;
         });
       
-        case 'EDIT_RECIPE':
-        return payload;
-
-      case "OPEN_PREV_RECIPE_VERSION":
-        return state.map(recipe => {
-          recipe.isFocused &&
-          ( recipe = {
+      case UPDATE_RECIPE:
+      return state.map(recipe => {
+        if ( recipe.id === payload.id ) {
+          const newId = Date.now();
+          return {
             ...recipe,
-            oldVersions: [ ...recipe.oldVersions, payload]
-          })
+            id: newId,
+            ingredients: payload.ingredients,
+            date: new Date(newId).toString().substr(0, 24)
+          }
+        }
+        return recipe; 
+      });
+
+      case SAVE_OLD_RECIPE_VERSION:
+        return state.map(recipe => {
+          if ( recipe.id === payload.id ) {
+            return {
+              ...recipe,
+              oldVersions: [ ...recipe.oldVersions, payload]
+            }
+          }
           return recipe;
         });
+
+      case "OPEN_PREV_RECIPE_VERSION":
+        return state;
       
         case "DELETE_PREV_RECIPE_VERSION":
         return payload;
 
-
-      // case 'ADD_TASKS_FROM_LOCAL_STORAGE':
-      //   return payload;
       
       default:
         return state

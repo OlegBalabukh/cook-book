@@ -50,7 +50,6 @@ export default function NewRecipe(props) {
 
     if (name === "" || ingredients === "") {
       handleErrors();
-      console.log('works'); 
     } else {
       addRecipe(input);
       handleClose();

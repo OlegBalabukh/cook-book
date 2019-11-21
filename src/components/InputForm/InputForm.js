@@ -11,14 +11,15 @@ import useStyles from '../../common/DialogForm.style';
 export default function InputForm (props) {
   const classes = useStyles();
   //const [open, setOpen] = React.useState(false);
-  const [input, setInput] = React.useState({name: "", ingredients: "", id: ""});
+  const { id, name, ingredients, edit } = props;
+  const [input, setInput] = React.useState({name: name, ingredients: ingredients, id: id});
 
   const handleRecipeName = ({target: { value } }) => {
-    setInput({...input, name: value });    
+    setInput({...input, name: value, id: Date.now() });    
   };
 
   const handleIngredients = ({target: { value } }) => {
-    setInput({...input, ingredients: value, id: Date.now() });    
+    setInput({...input, ingredients: value });    
   };
 
  const cancelEdit = () => {
@@ -26,7 +27,7 @@ export default function InputForm (props) {
 
  }
 
-  const handleEditedRecipe = () => {
+  const getEditedRecipe = () => {
     props.editedRecipe(input)  
   };
 
@@ -34,7 +35,7 @@ export default function InputForm (props) {
       <Dialog 
         disableBackdropClick
         disableEscapeKeyDown 
-        open = { props.edit }
+        open = { edit }
       >
       <DialogTitle>Fill the form</DialogTitle>
       <DialogContent>
@@ -47,7 +48,7 @@ export default function InputForm (props) {
             fullWidth={false}
             autoComplete='off'
             onChange={handleRecipeName}
-            // inputRef
+            defaultValue={name}
           />
           <TextField
             id="standard-basic"
@@ -57,6 +58,7 @@ export default function InputForm (props) {
             multiline={true}
             fullWidth={true}
             onChange={handleIngredients}
+            defaultValue={ingredients}
           />
         </form>
       </DialogContent>
@@ -64,7 +66,7 @@ export default function InputForm (props) {
         <Button onClick={cancelEdit} color="primary">
           Close
         </Button>
-        <Button onClick={handleEditedRecipe} color="primary">
+        <Button onClick={getEditedRecipe} color="primary">
           add Recipe
         </Button>
       </DialogActions>

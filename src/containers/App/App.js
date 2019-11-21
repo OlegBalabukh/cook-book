@@ -6,10 +6,12 @@ import Recipe from '../../components/Recipe/Recipe';
 import { addRecipeAction } from "./actions/addRecipe.action";
 import { deleteRecipeAction } from "./actions/deleteRecipe.action";
 import { setActiveRecipeAction } from "./actions/setActiveRecipe.action.js";
+import { saveOldRecipeVersionAction } from "./actions/saveOldRecipeVersion.action.js";
+import { updateRecipeAction} from "./actions/updateRecipe.action.js";
 
 import './App.css';
 
-function App({ addRecipe, deleteRecipe, setActiveRecipe, recipes }) {
+function App({ addRecipe, deleteRecipe, setActiveRecipe, saveOldRecipeVersion, updateRecipe, recipes }) {
   return (
     <div className="app">
       <header className="app-header">
@@ -27,6 +29,9 @@ function App({ addRecipe, deleteRecipe, setActiveRecipe, recipes }) {
               recipe={recipe}
               deleteRecipe={deleteRecipe}
               setActiveRecipe={setActiveRecipe}
+              addRecipe={addRecipe}
+              saveOldRecipeVersion={saveOldRecipeVersion}
+              updateRecipe={updateRecipe}
             />  
           ) 
         })}
@@ -48,7 +53,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addRecipe: (newRecipe) => { dispatch(addRecipeAction(newRecipe)); },
   deleteRecipe: (id) => { dispatch(deleteRecipeAction(id)); },
-  setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); }, 
+  setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); },
+  saveOldRecipeVersion: (recipe) => { dispatch(saveOldRecipeVersionAction(recipe)); },
+  updateRecipe: (id) => { dispatch(updateRecipeAction(id)); }, 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
