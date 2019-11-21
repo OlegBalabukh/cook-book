@@ -3,7 +3,9 @@ import {
   DELETE_RECIPE,
   SET_ACTIVE_RECIPE,
   UPDATE_RECIPE,
-  SAVE_OLD_RECIPE_VERSION
+  SAVE_RECIPE_VERSION,
+  SET_ACTIVE_VERSION,
+  DELETE_VERSION
 } from '../constants'
 
 export const recipesReducer = (state = [], {type, payload}) => {
@@ -32,20 +34,20 @@ export const recipesReducer = (state = [], {type, payload}) => {
         });
       
       case UPDATE_RECIPE:
-      return state.map(recipe => {
-        if ( recipe.id === payload.id ) {
-          const newId = Date.now();
-          return {
-            ...recipe,
-            id: newId,
-            ingredients: payload.ingredients,
-            date: new Date(newId).toString().substr(0, 24)
+        return state.map(recipe => {
+          if ( recipe.id === payload.id ) {
+            const newId = Date.now();
+            return {
+              ...recipe,
+              id: newId,
+              ingredients: payload.ingredients,
+              date: new Date(newId).toString().substr(0, 24)
+            }
           }
-        }
-        return recipe; 
-      });
+          return recipe; 
+        });
 
-      case SAVE_OLD_RECIPE_VERSION:
+      case SAVE_RECIPE_VERSION:
         return state.map(recipe => {
           if ( recipe.id === payload.id ) {
             const oldVersion = {
@@ -63,12 +65,34 @@ export const recipesReducer = (state = [], {type, payload}) => {
           return recipe;
         });
 
-      case "OPEN_PREV_RECIPE_VERSION":
-        return state;
+      case SET_ACTIVE_VERSION:
+        return state.map(recipe => {
+          if (recipe.isFocused) {
+            return {
+              ...recipe,
+              oldVersions: recipe.oldVersions
+                .map(version => {
+                version.id === payload
+                  ? version = {...version, isFocused: true}
+                  : version = {...version, isFocused: false}
+                  return version;
+                })
+            }
+          }
+          return recipe;
+        });
       
-        case "DELETE_PREV_RECIPE_VERSION":
-        return payload;
-
+      case DELETE_VERSION:
+        return state.map(recipe => {
+          if (recipe.isFocused) {
+            return {
+              ...recipe,
+              oldVersions: recipe.oldVersions
+                .filter(version => version.id !== payload)
+            }
+          }
+          return recipe;
+        });
       
       default:
         return state

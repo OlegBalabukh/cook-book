@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import ColoredSquare  from '../ColoredSquare/ColoredSquare';
 import InputForm from '../InputForm/InputForm';
-import './Recipe.css';
+import '../../common/Recipe.css';
 
 const Recipe = (props) => {
 const { id, name, date, ingredients, isFocused } = props.recipe;
-const { deleteRecipe, setActiveRecipe, addRecipe, saveOldRecipeVersion, updateRecipe } = props;
+const { deleteRecipe, setActiveRecipe, addRecipe, saveRecipeVersion, updateRecipe } = props;
 
 const [ edit, setEdit ] = useState(false);
 const [ showIngredients, setShowIngredients ] = useState(false);
@@ -21,7 +21,7 @@ const handleEditedRecipe = (edited) => {
   if ( edited.id !== id ) {
     addRecipe(edited);
   } else if (edited.ingredients !== ingredients) {
-    saveOldRecipeVersion(props.recipe)
+    saveRecipeVersion(props.recipe)
     updateRecipe(edited)
   }
 }
