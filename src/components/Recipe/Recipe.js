@@ -20,11 +20,9 @@ const handleEditedRecipe = (edited) => {
 
   if ( edited.id !== id ) {
     addRecipe(edited);
-  } else if (edited.ingredients !== ingredients) {    
-    // add updated recipe && save old version
+  } else if (edited.ingredients !== ingredients) {
     saveOldRecipeVersion(props.recipe)
     updateRecipe(edited)
-    console.log('add updated recipe && save old version')
   }
 }
 

@@ -48,9 +48,16 @@ export const recipesReducer = (state = [], {type, payload}) => {
       case SAVE_OLD_RECIPE_VERSION:
         return state.map(recipe => {
           if ( recipe.id === payload.id ) {
+            const oldVersion = {
+              id: payload.id,
+              name: payload.name,
+              ingredients: payload.ingredients,
+              date: payload.date,
+              isFocused: false
+            }
             return {
               ...recipe,
-              oldVersions: [ ...recipe.oldVersions, payload]
+              oldVersions: [ ...recipe.oldVersions, oldVersion]
             }
           }
           return recipe;
