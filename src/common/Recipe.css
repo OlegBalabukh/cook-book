@@ -9,8 +9,20 @@
   box-sizing: content-box;
   display: flex;  
   flex-direction: row;
-  border: 1px solid red;
+  box-shadow: 0 0 4px gray;
   cursor: pointer;
+  margin: 8px 0 8px 0;
+}
+
+.focusHeader {
+  height: 50px;
+  box-sizing: content-box;
+  display: flex;  
+  flex-direction: row;
+  box-shadow: 0 0 4px #FF2C5F;
+  background-color: #FFD4DF;
+  cursor: pointer;
+  margin: 8px 0 8px 0;
 }
 
 .recipeName {
@@ -22,8 +34,9 @@
   padding: 13px 0 13px 0;
   margin-left: auto;
   margin-right: 15px;
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-weight: bold;
+  color: #fff;
 }
 
 .ingredients {

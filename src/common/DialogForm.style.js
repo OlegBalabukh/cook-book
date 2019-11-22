@@ -21,7 +21,8 @@ export default makeStyles(theme => ({
     width: 500,
   },
   newRecipeButton: {
-    margin: theme.spacing(2)
+    margin: theme.spacing(2),
+    fontWeight: 600
   },
   button: {
     fontWeight: 600,

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Button from '@material-ui/core/Button';
-import ColoredSquare  from '../ColoredSquare/ColoredSquare';
 import InputForm from '../InputForm/InputForm';
 import useStyles from '../../common/DialogForm.style';
 import '../../common/Recipe.css';
@@ -49,10 +48,7 @@ const handleShow = () => {
 
   return (   
     <div className="recipe" >
-        <div className="header" onClick={ handleShow }>
-          { isFocused && (
-            <ColoredSquare width="5px" height="50px" color="#FF2C5F" />
-          )}
+        <div className={ isFocused ? "focusHeader" : "header"} onClick={ handleShow }>
           <h6 className="recipeName"> { name }
             <p id="oldVersions" className="badge badge-pill">0</p>
           </h6>

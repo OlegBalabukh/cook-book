@@ -61,7 +61,7 @@ export default function NewRecipe(props) {
       <Button
         onClick={ handleClickOpen }
         className={classes.newRecipeButton}
-        variant="contained"
+        variant="outlined"
         color="primary"
       > 
         Add new Recipe
