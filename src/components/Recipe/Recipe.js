@@ -6,60 +6,58 @@ import useStyles from '../../common/DialogForm.style';
 import '../../common/Recipe.css';
 
 const Recipe = (props) => {
-const classes = useStyles();
-const { id, name, date, ingredients, isFocused, oldVersions } = props.recipe;
-const { deleteRecipe, setActiveRecipe, addRecipe, saveRecipeVersion, updateRecipe } = props;
+  const classes = useStyles();
+  const { id, name, date, ingredients, isFocused, oldVersions } = props.recipe;
+  const { deleteRecipe, setActiveRecipe, addRecipe, saveRecipeVersion, updateRecipe } = props;
 
-const [ edit, setEdit ] = useState(false);
-const [ showIngredients, setShowIngredients ] = useState(false);
+  const [ edit, setEdit ] = useState(false);
+  const [ showIngredients, setShowIngredients ] = useState(false);
 
-const onEdit = () => {
-  setEdit(true)
-}
-
-const handleEditedRecipe = (edited) => {
-  setEdit(false);
-
-  if ( edited.id !== id ) {
-    addRecipe(edited);
-  } else if (edited.ingredients !== ingredients) {
-    saveRecipeVersion(props.recipe)
-    updateRecipe(edited)
+  const onEdit = () => {
+    setEdit(true)
   }
-}
 
-const getCancelConfirmation = () => {
-  setEdit(false)
-}
+  const handleEditedRecipe = (edited) => {
+    setEdit(false);
 
-const handleDelete = () => {
-  deleteRecipe(id)
-}
+    if ( edited.id !== id ) {
+      addRecipe(edited);
+    } else if (edited.ingredients !== ingredients) {
+      saveRecipeVersion(props.recipe)
+      updateRecipe(edited)
+    }
+  }
 
-const handleShow = () => {
-  setActiveRecipe(id); 
-  
-  if (!isFocused && !showIngredients) {
-    setShowIngredients(true)    
-  } else if (isFocused === true) {
-    setShowIngredients(!showIngredients)
-  }  
-}
+  const handleClose = () => {
+    setEdit(false)
+  }
+
+  const handleDelete = () => {
+    deleteRecipe(id)
+  }
+
+  const handleShow = () => {
+    setActiveRecipe(id); 
+    
+    if (!isFocused && !showIngredients) {
+      setShowIngredients(true)    
+    } else if (isFocused === true) {
+      setShowIngredients(!showIngredients)
+    }  
+  }
 
   return (   
     <div className="recipe" >
         <div className={ isFocused ? "focusRecipe" : "header"} onClick={ handleShow }>
-          <h6 className="recipeName">
-            { name }
+          <h6 className="recipeName">{ name }
             { oldVersions.length > 0 &&
               <p id="updated">
                 <span>updated</span>
                 <span id="oldVersions" className="badge badge-pill">{oldVersions.length}</span>
               </p>
-            }          
+            }
           </h6>
-           
-          <div className="date"> {date} </div>
+          <div className="date">{ date }</div>
         </div>
         { isFocused && showIngredients &&  ( 
             <div className="ingredients">
@@ -87,14 +85,15 @@ const handleShow = () => {
                 DELETE</Button>
               </div>
               { edit && 
-              <InputForm                
-                id={id}
-                name={name}
-                edit={edit}
-                ingredients={ingredients}                
-                editedRecipe = {handleEditedRecipe}
-                cancelConfirmation = {getCancelConfirmation}
-                />}
+                <InputForm
+                  id={id}
+                  name={name}
+                  edit={edit}
+                  ingredients={ingredients} 
+                  editedRecipe = {handleEditedRecipe}
+                  cancelConfirmation = {handleClose}
+                />
+              }
             </div>
           )}
     </div>
