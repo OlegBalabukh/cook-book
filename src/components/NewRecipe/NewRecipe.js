@@ -61,6 +61,8 @@ export default function NewRecipe(props) {
       <Button
         onClick={ handleClickOpen }
         className={classes.newRecipeButton}
+        variant="contained"
+        color="primary"
       > 
         Add new Recipe
       </Button>
@@ -72,7 +74,7 @@ export default function NewRecipe(props) {
       >
       <DialogTitle>Fill the form</DialogTitle>
       <DialogContent>
-        <form className={classes.container}>          
+        <form className={classes.container}>
           <TextField
             id="standard-basic"
             className={classes.textFieldRecipeName}
@@ -98,10 +100,20 @@ export default function NewRecipe(props) {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button
+          onClick={handleClose}
+          variant="outlined"
+          color="secondary"
+          className={classes.button}
+        >
           Close
         </Button>
-        <Button onClick={handleNewRecipe} color="primary">
+        <Button
+          onClick={handleNewRecipe}
+          variant="outlined"
+          color="primary"
+          className={classes.button}
+        >
           add Recipe
         </Button>
       </DialogActions>

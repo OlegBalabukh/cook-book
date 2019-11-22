@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
+import Button from '@material-ui/core/Button';
 import ColoredSquare  from '../ColoredSquare/ColoredSquare';
 import InputForm from '../InputForm/InputForm';
+import useStyles from '../../common/DialogForm.style';
 import '../../common/Recipe.css';
 
 const Recipe = (props) => {
+const classes = useStyles();
 const { id, name, date, ingredients, isFocused } = props.recipe;
 const { deleteRecipe, setActiveRecipe, addRecipe, saveRecipeVersion, updateRecipe } = props;
 
@@ -65,8 +68,21 @@ const handleShow = () => {
                 }
               </ul>
               <div id="buttons">
-                <button className="btn btn-warning" onClick={ onEdit }>EDIT</button>
-                <button className="btn btn-danger" onClick={ handleDelete }>DELETE</button>
+                <Button
+                  onClick={ onEdit }
+                  variant="outlined"
+                  color="primary"
+                  className={classes.button}
+                >
+                  EDIT
+                </Button>
+                <Button
+                  onClick={ handleDelete }
+                  variant="outlined"
+                  color="secondary"
+                  className={classes.button}
+                >
+                DELETE</Button>
               </div>
               { edit && 
               <InputForm                

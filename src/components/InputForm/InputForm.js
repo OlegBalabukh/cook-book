@@ -10,7 +10,6 @@ import useStyles from '../../common/DialogForm.style';
 
 export default function InputForm (props) {
   const classes = useStyles();
-  //const [open, setOpen] = React.useState(false);
   const { id, name, ingredients, edit } = props;
   const [input, setInput] = React.useState({name: name, ingredients: ingredients, id: id});
 
@@ -63,11 +62,21 @@ export default function InputForm (props) {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={cancelEdit} color="primary">
+        <Button
+          onClick={cancelEdit}
+          variant="outlined"
+          color="secondary"
+          className={classes.button}
+        >
           Close
         </Button>
-        <Button onClick={getEditedRecipe} color="primary">
-          add Recipe
+        <Button 
+          onClick={getEditedRecipe}
+          variant="outlined"
+          color="primary"
+          className={classes.button}
+        >
+          Edit Recipe
         </Button>
       </DialogActions>
       </Dialog>

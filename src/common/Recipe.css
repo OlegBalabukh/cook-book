@@ -35,11 +35,3 @@
 ul {
   list-style-type: none;
 }
-
-.btn-danger, .btn-warning {
-  display: inline;
-  color: white !important;
-  font-weight: bold;
-  margin-left: 15px;
-}
-

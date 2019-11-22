@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
 import ColoredSquare  from '../ColoredSquare/ColoredSquare';
+import Button from '@material-ui/core/Button';
+import useStyles from '../../common/DialogForm.style';
 import '../../common/Recipe.css';
 
 const Version = (props) => {
+  const classes = useStyles();
   const { id, name, date, ingredients, isFocused } = props.recipe;
   const { deleteVersion, setActiveVersion } = props;
 
@@ -40,10 +43,14 @@ const Version = (props) => {
               <li key={index}>{ item }</li> )
             }
           </ul>
-          <button
-            className="btn btn-danger"
+          <Button
             onClick={ handleDelete }
-          > DELETE </button>          
+            variant="outlined"
+            color="secondary"
+            className={classes.button}
+          >
+            DELETE
+          </Button>          
         </div>
       )}
     </div>
