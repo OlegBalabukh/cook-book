@@ -12,9 +12,10 @@ export default function InputForm (props) {
   const classes = useStyles();
   const { id, name, ingredients, edit } = props;
   const initErrorMessages = {name: false, ingredients: false};
+  const confirmButton = id ? "Edit Recipe" : "Add Recipe";
 
   const [input, setInput] = React.useState({name: name, ingredients: ingredients, id: id});
-  const [error, setError] = React.useState(initErrorMessages);
+  const [error, setError] = React.useState(initErrorMessages);  
 
   const handleRecipeName = ({target: { value } }) => {
     setInput({...input, name: value, id: Date.now() });
@@ -98,7 +99,7 @@ export default function InputForm (props) {
           color="primary"
           className={classes.button}
         >
-          Edit Recipe
+          { confirmButton }
         </Button>
       </DialogActions>
       </Dialog>

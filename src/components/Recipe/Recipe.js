@@ -61,7 +61,7 @@ const Recipe = (props) => {
         </div>
         { isFocused && showIngredients &&  ( 
             <div className="ingredients">
-              <div>INGREDIENTS</div>
+              <div className="ingHeader">Ingredients</div>
               <ul>
                 { ingredients.split(",").map((item, index) =>
                     <li key={index}>{ item }</li>)
