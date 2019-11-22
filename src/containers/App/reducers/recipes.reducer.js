@@ -59,7 +59,7 @@ export const recipesReducer = (state = [], {type, payload}) => {
             }
             return {
               ...recipe,
-              oldVersions: [ ...recipe.oldVersions, oldVersion]
+              oldVersions: [oldVersion, ...recipe.oldVersions]
             }
           }
           return recipe;
