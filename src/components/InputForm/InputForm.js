@@ -11,23 +11,41 @@ import useStyles from '../../common/DialogForm.style';
 export default function InputForm (props) {
   const classes = useStyles();
   const { id, name, ingredients, edit } = props;
+  const initErrorMessages = {name: false, ingredients: false};
+
   const [input, setInput] = React.useState({name: name, ingredients: ingredients, id: id});
+  const [error, setError] = React.useState(initErrorMessages);
 
   const handleRecipeName = ({target: { value } }) => {
-    setInput({...input, name: value, id: Date.now() });    
+    setInput({...input, name: value, id: Date.now() });
+    setError({...error, name: false});   
   };
 
   const handleIngredients = ({target: { value } }) => {
-    setInput({...input, ingredients: value });    
+    setInput({...input, ingredients: value });
+    setError({...error, ingredients: false})   
   };
 
  const cancelEdit = () => {
-  props.cancelConfirmation() 
-
+  props.cancelConfirmation();
+  setError(initErrorMessages);
  }
 
+ const handleErrors = () => {
+  input.name === ""
+    ? setError({...error, name: true})
+    : setError({...error, ingredients: true})
+  };
+
   const getEditedRecipe = () => {
-    props.editedRecipe(input)  
+    const {name , ingredients} = input;
+
+    if (name === "" || ingredients === "") {
+      handleErrors();
+    } else {
+      props.editedRecipe(input)  
+      cancelEdit();
+    }
   };
 
   return (    
@@ -48,6 +66,8 @@ export default function InputForm (props) {
             autoComplete='off'
             onChange={handleRecipeName}
             defaultValue={name}
+            error={error.name }
+            helperText={error.name ? 'Empty field!' : ' '}
           />
           <TextField
             id="standard-basic"
@@ -58,6 +78,8 @@ export default function InputForm (props) {
             fullWidth={true}
             onChange={handleIngredients}
             defaultValue={ingredients}
+            error={ error.ingredients }
+            helperText={ error.ingredients ? 'Empty field!' : ' '}
           />
         </form>
       </DialogContent>
