@@ -26,7 +26,7 @@ const Version = (props) => {
 
   return (
     <div className="recipe" >
-      <div className={ isFocused ? "focusHeader" : "header"} onClick={ handleShow }>        
+      <div className={ isFocused ? "focusVersion" : "header"} onClick={ handleShow }>        
         <h6 className="recipeName"> { name }</h6>
         <div className="date"> {date} </div>
       </div>

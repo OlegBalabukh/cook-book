@@ -7,7 +7,7 @@ import '../../common/Recipe.css';
 
 const Recipe = (props) => {
 const classes = useStyles();
-const { id, name, date, ingredients, isFocused } = props.recipe;
+const { id, name, date, ingredients, isFocused, oldVersions } = props.recipe;
 const { deleteRecipe, setActiveRecipe, addRecipe, saveRecipeVersion, updateRecipe } = props;
 
 const [ edit, setEdit ] = useState(false);
@@ -48,9 +48,15 @@ const handleShow = () => {
 
   return (   
     <div className="recipe" >
-        <div className={ isFocused ? "focusHeader" : "header"} onClick={ handleShow }>
-          <h6 className="recipeName"> { name }
-            <p id="oldVersions" className="badge badge-pill">0</p>
+        <div className={ isFocused ? "focusRecipe" : "header"} onClick={ handleShow }>
+          <h6 className="recipeName">
+            { name }
+            { oldVersions.length > 0 &&
+              <p id="updated">
+                <span>updated</span>
+                <span id="oldVersions" className="badge badge-pill">{oldVersions.length}</span>
+              </p>
+            }          
           </h6>
            
           <div className="date"> {date} </div>

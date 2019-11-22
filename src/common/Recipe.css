@@ -1,9 +1,3 @@
-#oldVersions {
-  background-color: pink;
-  color: white;
-  margin-left: 5px;
-}
-
 .header {
   height: 50px;
   box-sizing: content-box;
@@ -11,16 +5,39 @@
   flex-direction: row;
   box-shadow: 0 0 4px gray;
   cursor: pointer;
-  margin: 8px 0 8px 0;
+  margin: 8px 0 8px 0;  
 }
 
-.focusHeader {
+#updated {  
+  font-size: 0.7em;
+  color: #737373;
+  margin-left: 10px;
+}
+
+#oldVersions {
+  background-color: #66ab66;
+  color: white;
+  margin-left: 5px;
+}
+
+.focusRecipe {
   height: 50px;
   box-sizing: content-box;
   display: flex;  
   flex-direction: row;
-  box-shadow: 0 0 4px #FF2C5F;
-  background-color: #FFD4DF;
+  box-shadow: 0 0 4px #007300;
+  background-color: #bddebd;
+  cursor: pointer;
+  margin: 8px 0 8px 0;
+}
+
+.focusVersion {
+  height: 50px;
+  box-sizing: content-box;
+  display: flex;  
+  flex-direction: row;
+  box-shadow: 0 0 4px #660066;
+  background-color: #e0cce0;
   cursor: pointer;
   margin: 8px 0 8px 0;
 }
@@ -28,15 +45,15 @@
 .recipeName {
   padding: 13px 0 13px 0;
   margin-left: 15px;
+  display: flex;
 }
 
 .date {
   padding: 13px 0 13px 0;
   margin-left: auto;
   margin-right: 15px;
-  font-size: 0.9em;
-  font-weight: bold;
-  color: #fff;
+  font-size: 0.8em;
+  color: #737373;
 }
 
 .ingredients {
