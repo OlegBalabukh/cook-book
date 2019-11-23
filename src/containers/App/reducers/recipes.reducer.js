@@ -12,14 +12,17 @@ export const recipesReducer = (state = [], {type, payload}) => {
   switch(type) {
 
     case ADD_RECIPE:
-      return state.concat({
-        id: payload.id,
-        name: payload.name,
-        ingredients: payload.ingredients,
-        date: new Date(payload.id).toString().substr(0, 24),
-        isFocused: false,
-        oldVersions: []
-      });
+      return [
+        {
+          id: payload.id,
+          name: payload.name,
+          ingredients: payload.ingredients,
+          date: new Date(payload.id).toString().substr(0, 24),
+          isFocused: false,
+          oldVersions: []
+        },
+        ...state
+      ];
 
       case DELETE_RECIPE:
         return state.filter(recipe =>

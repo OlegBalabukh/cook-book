@@ -49,6 +49,14 @@
   font-size: 1.1em;
 }
 
+.versionDate {
+  padding: 13px 0 13px 0;
+  margin-left: 15px;
+  display: flex;
+  font-size: 1em;
+  color: #737373;
+}
+
 .date {
   padding: 13px 0 13px 0;
   margin-left: auto;
