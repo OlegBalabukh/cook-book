@@ -1,0 +1,25 @@
+.app {
+  text-align: center;
+  background-color: white;
+}
+
+.main {
+  margin:0 auto;
+  width: 90%;
+  min-width: 400px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;  
+  box-shadow: 0 0 4px gray;
+}
+
+.section {
+  width: 45%;
+  min-width: 400px;
+  height: auto;
+  box-shadow: 0 0 4px gray;
+  margin: 20px;  
+}
+
+
+

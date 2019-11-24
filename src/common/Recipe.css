@@ -1,0 +1,81 @@
+.header {
+  height: 50px;
+  box-sizing: content-box;
+  display: flex;  
+  flex-direction: row;
+  box-shadow: 0 0 4px gray;
+  cursor: pointer;
+  margin: 8px 0 8px 0;  
+}
+
+#updated {  
+  font-size: 0.7em;
+  color: #737373;
+  margin-left: 10px;
+}
+
+#oldVersions {
+  background-color: #66ab66;
+  color: white;
+  margin-left: 5px;
+}
+
+.focusRecipe {
+  height: 50px;
+  box-sizing: content-box;
+  display: flex;  
+  flex-direction: row;
+  box-shadow: 0 0 4px #007300;
+  background-color: #bddebd;
+  cursor: pointer;
+  margin: 8px 0 8px 0;
+}
+
+.focusVersion {
+  height: 50px;
+  box-sizing: content-box;
+  display: flex;  
+  flex-direction: row;
+  box-shadow: 0 0 4px #660066;
+  background-color: #e0cce0;
+  cursor: pointer;
+  margin: 8px 0 8px 0;
+}
+
+.recipeName {
+  padding: 13px 0 13px 0;
+  margin-left: 15px;
+  display: flex;
+  font-size: 1.1em;
+}
+
+.versionDate {
+  padding: 13px 0 13px 0;
+  margin-left: 15px;
+  display: flex;
+  font-size: 1em;
+  color: #737373;
+}
+
+.date {
+  padding: 13px 0 13px 0;
+  margin-left: auto;
+  margin-right: 15px;
+  font-size: 0.8em;
+  color: #737373;
+}
+
+.ingredients {
+  text-align: right;
+  margin-right: 15px;
+  padding-bottom: 15px;
+}
+
+.ingHeader {
+  font-size: 1.8em;
+}
+
+ul {
+  list-style-type: none;
+  font-size: 0.9em;
+}
