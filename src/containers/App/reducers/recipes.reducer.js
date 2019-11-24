@@ -21,8 +21,8 @@ export const recipesReducer = (state = [], {type, payload}) => {
           isFocused: false,
           oldVersions: []
         },
-        ...state
-      ];
+        ...state.filter(recipe => recipe.name !== payload.name)
+      ]
 
       case DELETE_RECIPE:
         return state.filter(recipe =>
