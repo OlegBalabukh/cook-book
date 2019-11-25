@@ -23,16 +23,16 @@ function App(props) {
   return (
     <div className="app">
       <header className="app-header">
-        <h2>Cookbook</h2>       
+        <h2>Cookbook</h2>
       </header>
       
       <div className="main">
         <div className="section">
         <h5>RECIPES</h5>
         <NewRecipe addRecipe={addRecipe} />
-        { recipes.length > 0 && recipes.map(recipe => {          
+        { recipes.length > 0 && recipes.map(recipe => {
           return (
-            <Recipe 
+            <Recipe
               key={recipe.id}
               recipe={recipe}
               deleteRecipe={deleteRecipe}
@@ -40,9 +40,9 @@ function App(props) {
               addRecipe={addRecipe}
               saveRecipeVersion={saveRecipeVersion}
               updateRecipe={updateRecipe}
-            />  
-          ) 
-        })}          
+            />
+          )
+        })}
         </div>
         <div className="section">
           <h5>VERSIONS</h5>
@@ -54,7 +54,7 @@ function App(props) {
                   recipe={version}
                   deleteVersion={deleteVersion}
                   setActiveVersion={setActiveVersion}
-                />  
+                />
               )
             })
           }
@@ -72,7 +72,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addRecipe: (newRecipe) => { dispatch(addRecipeAction(newRecipe)); },
   deleteRecipe: (id) => { dispatch(deleteRecipeAction(id)); },
-  setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); },  
+  setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); },
   updateRecipe: (id) => { dispatch(updateRecipeAction(id)); },
 
   saveRecipeVersion: (recipe) => { dispatch(saveRecipeVersionAction(recipe)); },

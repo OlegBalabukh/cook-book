@@ -19,12 +19,12 @@ export default function InputForm (props) {
 
   const handleRecipeName = ({target: { value } }) => {
     setInput({...input, name: value, id: Date.now() });
-    setError({...error, name: false});   
+    setError({...error, name: false});
   };
 
   const handleIngredients = ({target: { value } }) => {
     setInput({...input, ingredients: value });
-    setError({...error, ingredients: false})   
+    setError({...error, ingredients: false})
   };
 
  const cancelEdit = () => {
@@ -44,20 +44,20 @@ export default function InputForm (props) {
     if (name === "" || ingredients === "") {
       handleErrors();
     } else {
-      props.editedRecipe(input)  
+      props.editedRecipe(input);
       cancelEdit();
     }
   };
 
-  return (    
-      <Dialog 
+  return (
+      <Dialog
         disableBackdropClick
         disableEscapeKeyDown 
         open = { edit }
       >
       <DialogTitle>Fill the form</DialogTitle>
       <DialogContent>
-        <form className={classes.container}>          
+        <form className={classes.container}>;
           <TextField
             id="standard-basic"
             className={classes.textFieldRecipeName}
@@ -66,7 +66,7 @@ export default function InputForm (props) {
             fullWidth={false}
             autoComplete='off'
             onChange={handleRecipeName}
-            defaultValue={name}
+            defaultValue={ name}
             error={error.name }
             helperText={error.name ? 'Empty field!' : ' '}
           />

@@ -40,9 +40,9 @@ const Recipe = (props) => {
     setActiveRecipe(id); 
     
     if (!isFocused && !showIngredients) {
-      setShowIngredients(true)    
+      setShowIngredients(true);
     } else if (isFocused === true) {
-      setShowIngredients(!showIngredients)
+      setShowIngredients(!showIngredients);
     }  
   }
 

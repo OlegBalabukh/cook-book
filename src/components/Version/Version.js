@@ -16,7 +16,7 @@ const Version = (props) => {
   }
 
   const handleShow = () => {
-    setActiveVersion(id);    
+    setActiveVersion(id);
     if (!isFocused && !showIngredients) {
       setShowIngredients(true)
     } else if (isFocused === true) {
@@ -26,15 +26,15 @@ const Version = (props) => {
 
   return (
     <div className="recipe" >
-      <div className={ isFocused ? "focusVersion" : "header"} onClick={ handleShow }>        
+      <div className={ isFocused ? "focusVersion" : "header"} onClick={ handleShow }>
         <h6 className="versionDate"> { date }</h6>
       </div>
-      { isFocused && showIngredients &&  ( 
+      { isFocused && showIngredients && (
         <div className="ingredients">
           <div className="ingHeader">Ingredients</div>
           <ul>
             { ingredients.split(",")
-              .map((item, index) => 
+              .map((item, index) =>
               <li key={index}>{ item }</li> )
             }
           </ul>
@@ -45,7 +45,7 @@ const Version = (props) => {
             className={classes.button}
           >
             DELETE
-          </Button>          
+          </Button>
         </div>
       )}
     </div>
