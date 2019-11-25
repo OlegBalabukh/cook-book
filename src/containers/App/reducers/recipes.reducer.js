@@ -1,4 +1,4 @@
-import { 
+import {
   ADD_RECIPE,
   DELETE_RECIPE,
   SET_ACTIVE_RECIPE,
@@ -47,7 +47,7 @@ export const recipesReducer = (state = [], {type, payload}) => {
               date: new Date(newId).toString().substr(0, 24)
             }
           }
-          return recipe; 
+          return recipe;
         });
 
       case SAVE_RECIPE_VERSION:
