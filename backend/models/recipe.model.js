@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
-  id: { type: Number, required: true },
-  name: { type: String, required: true },
-  ingredients: { type: String, required: true},
-  date: { type: String, required: true },
-  isFocused: { type: Boolean, required: true },
-  oldVersions: { type: Array, required: true },
+  id: { type: Number},
+  date: {type: String},
+  name: { type: String},
+  ingredients: { type: String},
+  isFocused: { type: Boolean},
+  oldVersions: { type: Array},
 }, {
-  timestamps: true,
+  timestamps: false,
 });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
