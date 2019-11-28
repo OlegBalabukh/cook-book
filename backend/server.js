@@ -15,12 +15,14 @@ mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
-});
-
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
 })
+.then(() => {
+  console.log('Connected to database!');
+})
+.catch(error => {
+  console.log('Connection failed!');
+  console.log(error);
+});
 
 const recipesRouter = require('./routes/recipes');
 app.use('/recipes', recipesRouter);
