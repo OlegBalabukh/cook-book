@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 
 import NewRecipe from '../../components/NewRecipe/NewRecipe';
 import Recipe from '../../components/Recipe/Recipe';
 import Version from '../../components/Version/Version';
+import { getRecipesAction } from "./actions/getRecipes.action";
 import { addRecipeAction } from "./actions/addRecipe.action";
 import { deleteRecipeAction } from "./actions/deleteRecipe.action";
 import { setActiveRecipeAction } from "./actions/setActiveRecipe.action.js";
@@ -15,24 +16,28 @@ import { deleteVersionAction } from "./actions/deleteVersion.action.js";
 import './App.css';
 
 function App(props) {
-  const { addRecipe, deleteRecipe, setActiveRecipe, updateRecipe } = props;
+  const { getRecipes, addRecipe, deleteRecipe, setActiveRecipe, updateRecipe } = props;
   const { saveRecipeVersion, deleteVersion, setActiveVersion, recipes } = props;
 
-  const focused = recipes.find(recipe => recipe.isFocused);  
+  const focused = recipes.find(recipe => recipe.isFocused);
+
+  useEffect(() => {
+    recipes.length === 0 && getRecipes();
+  }, [recipes, getRecipes]);
 
   return (
     <div className="app">
       <header className="app-header">
-        <h2>Cookbook</h2>       
+        <h2>Cookbook</h2>
       </header>
       
       <div className="main">
         <div className="section">
         <h5>RECIPES</h5>
         <NewRecipe addRecipe={addRecipe} />
-        { recipes.length > 0 && recipes.map(recipe => {          
+        { recipes.length > 0 && recipes.map(recipe => {
           return (
-            <Recipe 
+            <Recipe
               key={recipe.id}
               recipe={recipe}
               deleteRecipe={deleteRecipe}
@@ -40,9 +45,9 @@ function App(props) {
               addRecipe={addRecipe}
               saveRecipeVersion={saveRecipeVersion}
               updateRecipe={updateRecipe}
-            />  
-          ) 
-        })}          
+            />
+          )
+        })}
         </div>
         <div className="section">
           <h5>VERSIONS</h5>
@@ -54,13 +59,12 @@ function App(props) {
                   recipe={version}
                   deleteVersion={deleteVersion}
                   setActiveVersion={setActiveVersion}
-                />  
+                />
               )
             })
           }
         </div>
       </div>
-        
     </div>
   );
 }
@@ -70,9 +74,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getRecipes: () => { dispatch(getRecipesAction()); },
   addRecipe: (newRecipe) => { dispatch(addRecipeAction(newRecipe)); },
   deleteRecipe: (id) => { dispatch(deleteRecipeAction(id)); },
-  setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); },  
+  setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); },
   updateRecipe: (id) => { dispatch(updateRecipeAction(id)); },
 
   saveRecipeVersion: (recipe) => { dispatch(saveRecipeVersionAction(recipe)); },

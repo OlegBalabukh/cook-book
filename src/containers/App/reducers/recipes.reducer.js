@@ -1,4 +1,5 @@
-import { 
+import {
+  GET_RECIPES,
   ADD_RECIPE,
   DELETE_RECIPE,
   SET_ACTIVE_RECIPE,
@@ -10,6 +11,9 @@ import {
 
 export const recipesReducer = (state = [], {type, payload}) => {
   switch(type) {
+
+    case GET_RECIPES:
+      return state = payload.reverse();
 
     case ADD_RECIPE:
       return [
@@ -26,7 +30,7 @@ export const recipesReducer = (state = [], {type, payload}) => {
 
       case DELETE_RECIPE:
         return state.filter(recipe =>
-          recipe.id !== payload );
+          recipe._id !== payload );
 
       case SET_ACTIVE_RECIPE:
         return state.map(recipe => {

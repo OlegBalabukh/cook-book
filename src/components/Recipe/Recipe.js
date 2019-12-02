@@ -7,7 +7,7 @@ import '../../common/Recipe.css';
 
 const Recipe = (props) => {
   const classes = useStyles();
-  const { id, name, date, ingredients, isFocused, oldVersions } = props.recipe;
+  const { _id, id, name, date, ingredients, isFocused, oldVersions } = props.recipe;
   const { deleteRecipe, setActiveRecipe, addRecipe, saveRecipeVersion, updateRecipe } = props;
 
   const [ edit, setEdit ] = useState(false);
@@ -33,7 +33,7 @@ const Recipe = (props) => {
   }
 
   const handleDelete = () => {
-    deleteRecipe(id)
+    deleteRecipe(_id)
   }
 
   const handleShow = () => {
