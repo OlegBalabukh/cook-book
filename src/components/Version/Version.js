@@ -6,17 +6,17 @@ import '../../common/Recipe.css';
 
 const Version = (props) => {
   const classes = useStyles();
-  const { id, date, ingredients, isFocused } = props.recipe;
-  const { deleteVersion, setActiveVersion } = props;
+  const { id, name, date, ingredients, isFocused } = props.recipe;
+  const { deleteVersion, setActiveVersion, _id } = props;
 
   const [ showIngredients, setShowIngredients ] = useState(false);
 
   const handleDelete = () => {
-    deleteVersion(id)
+    deleteVersion({_id, id})
   }
 
   const handleShow = () => {
-    setActiveVersion(id);    
+    setActiveVersion(id);
     if (!isFocused && !showIngredients) {
       setShowIngredients(true)
     } else if (isFocused === true) {
@@ -26,10 +26,11 @@ const Version = (props) => {
 
   return (
     <div className="recipe" >
-      <div className={ isFocused ? "focusVersion" : "header"} onClick={ handleShow }>        
-        <h6 className="versionDate"> { date }</h6>
+      <div className={ isFocused ? "focusVersion" : "header"} onClick={ handleShow }>
+        <h6 className="versionDate"> { name }</h6>
+        <div className="date">{ date }</div>
       </div>
-      { isFocused && showIngredients &&  ( 
+      { isFocused && showIngredients && (
         <div className="ingredients">
           <div className="ingHeader">Ingredients</div>
           <ul>
@@ -45,7 +46,7 @@ const Version = (props) => {
             className={classes.button}
           >
             DELETE
-          </Button>          
+          </Button>
         </div>
       )}
     </div>

@@ -20,12 +20,25 @@ const Recipe = (props) => {
   const handleEditedRecipe = (edited) => {
     setEdit(false);
 
-    if ( edited.id !== id ) {
-      addRecipe(edited);
-    } else if (edited.ingredients !== ingredients) {
-      saveRecipeVersion(props.recipe)
-      updateRecipe(edited)
-    }
+    // if ( edited.id !== id ) {
+    //   addRecipe(edited);
+    // } else if (edited.ingredients !== ingredients) {
+
+      const oldVersion = {
+        id: props.recipe.id,
+        name: props.recipe.name,
+        ingredients: props.recipe.ingredients,
+        date: props.recipe.date,
+        isFocused: false
+      }
+      console.log(props.recipe._id);
+
+      const updatedRecipe = {
+        edited: {...edited, id: Date.now(), _id: props.recipe._id },
+        oldVersion
+      }
+      updateRecipe(updatedRecipe);
+   // }
   }
 
   const handleClose = () => {

@@ -34,7 +34,7 @@ function App(props) {
       <div className="main">
         <div className="section">
         <h5>RECIPES</h5>
-        <NewRecipe addRecipe={addRecipe} />
+        <NewRecipe addRecipe={addRecipe} getRecipes={getRecipes} />
         { recipes.length > 0 && recipes.map(recipe => {
           return (
             <Recipe
@@ -56,6 +56,7 @@ function App(props) {
               return (
                 <Version
                   key={version.id}
+                  _id = {focused._id}
                   recipe={version}
                   deleteVersion={deleteVersion}
                   setActiveVersion={setActiveVersion}

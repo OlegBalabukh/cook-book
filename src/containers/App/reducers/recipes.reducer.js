@@ -13,7 +13,12 @@ export const recipesReducer = (state = [], {type, payload}) => {
   switch(type) {
 
     case GET_RECIPES:
-      return state = payload.reverse();
+      return payload.slice().reverse()
+        .map(recipe => ({
+          ...recipe,
+          oldVersions: recipe.oldVersions.slice().reverse()
+        })
+      );
 
     case ADD_RECIPE:
       return [
@@ -41,17 +46,20 @@ export const recipesReducer = (state = [], {type, payload}) => {
         });
       
       case UPDATE_RECIPE:
+        console.log(payload);
+        console.log(state);
         return state.map(recipe => {
-          if ( recipe.id === payload.id ) {
-            const newId = Date.now();
+          if ( recipe._id === payload.edited._id ) {
             return {
               ...recipe,
-              id: newId,
-              ingredients: payload.ingredients,
-              date: new Date(newId).toString().substr(0, 24)
+              name: payload.edited.name,
+              id: payload.edited.id,
+              ingredients: payload.edited.ingredients,
+              date: new Date(payload.edited.id).toString().substr(0, 24),
+              oldVersions: [payload.oldVersion, ...recipe.oldVersions]
             }
           }
-          return recipe; 
+          return recipe;
         });
 
       case SAVE_RECIPE_VERSION:
@@ -95,7 +103,7 @@ export const recipesReducer = (state = [], {type, payload}) => {
             return {
               ...recipe,
               oldVersions: recipe.oldVersions
-                .filter(version => version.id !== payload)
+                .filter(version => version.id !== payload.id)
             }
           }
           return recipe;
