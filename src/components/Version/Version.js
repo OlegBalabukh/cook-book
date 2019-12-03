@@ -35,7 +35,7 @@ const Version = (props) => {
           <div className="ingHeader">Ingredients</div>
           <ul>
             { ingredients.split(",")
-              .map((item, index) => 
+              .map((item, index) =>
               <li key={index}>{ item }</li> )
             }
           </ul>

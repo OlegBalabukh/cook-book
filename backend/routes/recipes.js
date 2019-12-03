@@ -1,14 +1,12 @@
 const router = require('express').Router();
 let Recipe = require('../models/recipe.model');
 
-// get all recipes from db
 router.route('/').get((req, res) => {
   Recipe.find()
     .then(recipes => res.json(recipes))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// add new recipe to db
 router.route('/add').post((req, res) => {
   const newRecipe = new Recipe({
     id: Number(req.body.id),
@@ -19,11 +17,10 @@ router.route('/add').post((req, res) => {
     oldVersions: []
   });
   newRecipe.save()
-  .then(() => res.json('Recipe added!'))
+  .then(() => res.json('New Recipe added to db!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// update recipe
 router.route('/update/:id').post((req, res) => {
   Recipe.findById(req.params.id)
     .then(recipe => {
@@ -38,21 +35,19 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// delete recipe
 router.route('/:id').delete((req, res) => {
   Recipe.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Recipe deleted!'))
+    .then(() => res.json('Recipe deleted from db!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// delete version
 router.route('/version/:id').post((req, res) => {
   Recipe.update(
     {"_id": req.params.id},
     { $pull: { "oldVersions" : { "id": req.body.id } } },
     { safe: true }
   )
-  .then(() => res.json('Recipe version deleted!'))
+  .then(() => res.json('Recipe version deleted from db!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 

@@ -1,5 +1,5 @@
-import { GET_RECIPES } from '../constants';
 import axios from 'axios';
+import { GET_RECIPES } from '../constants';
 
 export const getRecipesAction = () => dispatch => {
   axios.get('http://localhost:5000/recipes/')

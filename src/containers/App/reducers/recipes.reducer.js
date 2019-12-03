@@ -1,10 +1,8 @@
 import {
   GET_RECIPES,
-  ADD_RECIPE,
   DELETE_RECIPE,
   SET_ACTIVE_RECIPE,
   UPDATE_RECIPE,
-  SAVE_RECIPE_VERSION,
   SET_ACTIVE_VERSION,
   DELETE_VERSION
 } from '../constants'
@@ -20,19 +18,6 @@ export const recipesReducer = (state = [], {type, payload}) => {
         })
       );
 
-    case ADD_RECIPE:
-      return [
-        {
-          id: payload.id,
-          name: payload.name,
-          ingredients: payload.ingredients,
-          date: new Date(payload.id).toString().substr(0, 24),
-          isFocused: false,
-          oldVersions: []
-        },
-        ...state.filter(recipe => recipe.name !== payload.name)
-      ]
-
       case DELETE_RECIPE:
         return state.filter(recipe =>
           recipe._id !== payload );
@@ -46,8 +31,6 @@ export const recipesReducer = (state = [], {type, payload}) => {
         });
       
       case UPDATE_RECIPE:
-        console.log(payload);
-        console.log(state);
         return state.map(recipe => {
           if ( recipe._id === payload.edited._id ) {
             return {
@@ -57,24 +40,6 @@ export const recipesReducer = (state = [], {type, payload}) => {
               ingredients: payload.edited.ingredients,
               date: new Date(payload.edited.id).toString().substr(0, 24),
               oldVersions: [payload.oldVersion, ...recipe.oldVersions]
-            }
-          }
-          return recipe;
-        });
-
-      case SAVE_RECIPE_VERSION:
-        return state.map(recipe => {
-          if ( recipe.id === payload.id ) {
-            const oldVersion = {
-              id: payload.id,
-              name: payload.name,
-              ingredients: payload.ingredients,
-              date: payload.date,
-              isFocused: false
-            }
-            return {
-              ...recipe,
-              oldVersions: [oldVersion, ...recipe.oldVersions]
             }
           }
           return recipe;

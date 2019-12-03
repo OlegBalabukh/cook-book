@@ -8,58 +8,34 @@ import '../../common/Recipe.css';
 const Recipe = (props) => {
   const classes = useStyles();
   const { _id, id, name, date, ingredients, isFocused, oldVersions } = props.recipe;
-  const { deleteRecipe, setActiveRecipe, addRecipe, saveRecipeVersion, updateRecipe } = props;
+  const { deleteRecipe, setActiveRecipe, updateRecipe } = props;
 
   const [ edit, setEdit ] = useState(false);
   const [ showIngredients, setShowIngredients ] = useState(false);
 
-  const onEdit = () => {
-    setEdit(true)
-  }
+  const onEdit = () => setEdit(true);
 
   const handleEditedRecipe = (edited) => {
     setEdit(false);
-
-    // if ( edited.id !== id ) {
-    //   addRecipe(edited);
-    // } else if (edited.ingredients !== ingredients) {
-
-      const oldVersion = {
-        id: props.recipe.id,
-        name: props.recipe.name,
-        ingredients: props.recipe.ingredients,
-        date: props.recipe.date,
-        isFocused: false
-      }
-      console.log(props.recipe._id);
-
-      const updatedRecipe = {
-        edited: {...edited, id: Date.now(), _id: props.recipe._id },
-        oldVersion
-      }
-      updateRecipe(updatedRecipe);
-   // }
+    const oldVersion = { id, name, ingredients, date, isFocused: false };    
+    const updated = { edited: {...edited, id: Date.now(), _id }, oldVersion };
+    updateRecipe(updated);
   }
-
-  const handleClose = () => {
-    setEdit(false)
-  }
-
-  const handleDelete = () => {
-    deleteRecipe(_id)
-  }
+  
+  const handleClose = () => setEdit(false);
+  const handleDelete = () => deleteRecipe(_id);
 
   const handleShow = () => {
-    setActiveRecipe(id); 
+    setActiveRecipe(id);
     
     if (!isFocused && !showIngredients) {
-      setShowIngredients(true)    
+      setShowIngredients(true)
     } else if (isFocused === true) {
       setShowIngredients(!showIngredients)
-    }  
+    }
   }
 
-  return (   
+  return (
     <div className="recipe" >
         <div className={ isFocused ? "focusRecipe" : "header"} onClick={ handleShow }>
           <h6 className="recipeName">{ name }
@@ -72,7 +48,7 @@ const Recipe = (props) => {
           </h6>
           <div className="date">{ date }</div>
         </div>
-        { isFocused && showIngredients &&  ( 
+        { isFocused && showIngredients && (
             <div className="ingredients">
               <div className="ingHeader">Ingredients</div>
               <ul>
@@ -97,13 +73,13 @@ const Recipe = (props) => {
                 >
                 DELETE</Button>
               </div>
-              { edit && 
+              { edit &&
                 <InputForm
                   id={id}
                   name={name}
                   edit={edit}
-                  ingredients={ingredients} 
-                  editedRecipe = {handleEditedRecipe}
+                  ingredients={ingredients}
+                  handleInput = {handleEditedRecipe}
                   cancelConfirmation = {handleClose}
                 />
               }

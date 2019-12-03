@@ -9,7 +9,6 @@ import { addRecipeAction } from "./actions/addRecipe.action";
 import { deleteRecipeAction } from "./actions/deleteRecipe.action";
 import { setActiveRecipeAction } from "./actions/setActiveRecipe.action.js";
 import { updateRecipeAction} from "./actions/updateRecipe.action.js";
-import { saveRecipeVersionAction } from "./actions/saveRecipeVersion.action.js";
 import { setActiveVersionAction } from "./actions/setActiveVersion.action.js";
 import { deleteVersionAction } from "./actions/deleteVersion.action.js";
 
@@ -17,7 +16,7 @@ import './App.css';
 
 function App(props) {
   const { getRecipes, addRecipe, deleteRecipe, setActiveRecipe, updateRecipe } = props;
-  const { saveRecipeVersion, deleteVersion, setActiveVersion, recipes } = props;
+  const { deleteVersion, setActiveVersion, recipes } = props;
 
   const focused = recipes.find(recipe => recipe.isFocused);
 
@@ -43,7 +42,6 @@ function App(props) {
               deleteRecipe={deleteRecipe}
               setActiveRecipe={setActiveRecipe}
               addRecipe={addRecipe}
-              saveRecipeVersion={saveRecipeVersion}
               updateRecipe={updateRecipe}
             />
           )
@@ -80,8 +78,7 @@ const mapDispatchToProps = (dispatch) => ({
   deleteRecipe: (id) => { dispatch(deleteRecipeAction(id)); },
   setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); },
   updateRecipe: (id) => { dispatch(updateRecipeAction(id)); },
-
-  saveRecipeVersion: (recipe) => { dispatch(saveRecipeVersionAction(recipe)); },
+  
   setActiveVersion: (id) => { dispatch(setActiveVersionAction(id)); },
   deleteVersion: (id) => { dispatch(deleteVersionAction(id)); },
 });

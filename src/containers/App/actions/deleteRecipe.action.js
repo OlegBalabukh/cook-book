@@ -8,5 +8,5 @@ export const deleteRecipeAction = (payload) => dispatch => {
   dispatch({
     type: DELETE_RECIPE,
     payload
-  });  
+  });
 };

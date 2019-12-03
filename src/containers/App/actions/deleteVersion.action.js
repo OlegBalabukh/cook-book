@@ -1,5 +1,5 @@
-import { DELETE_VERSION } from '../constants';
 import axios from 'axios';
+import { DELETE_VERSION } from '../constants';
 
 export const deleteVersionAction = (payload) => dispatch => {
   console.log(payload);
