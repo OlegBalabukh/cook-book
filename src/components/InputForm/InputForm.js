@@ -19,12 +19,12 @@ export default function InputForm (props) {
 
   const handleRecipeName = ({target: { value } }) => {
     setInput({...input, name: value, id: Date.now() });
-    setError({...error, name: false});   
+    setError({...error, name: false});
   };
 
   const handleIngredients = ({target: { value } }) => {
     setInput({...input, ingredients: value });
-    setError({...error, ingredients: false})   
+    setError({...error, ingredients: false})
   };
 
  const cancelEdit = () => {
@@ -66,7 +66,7 @@ export default function InputForm (props) {
             fullWidth={false}
             autoComplete='off'
             onChange={handleRecipeName}
-            defaultValue={name}
+            defaultValue={ name}
             error={error.name }
             helperText={error.name ? 'Empty field!' : ' '}
           />

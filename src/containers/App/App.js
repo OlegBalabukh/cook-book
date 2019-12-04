@@ -33,7 +33,7 @@ function App(props) {
       <div className="main">
         <div className="section">
         <h5>RECIPES</h5>
-        <NewRecipe addRecipe={addRecipe} getRecipes={getRecipes} />
+        <NewRecipe addRecipe={addRecipe} />
         { recipes.length > 0 && recipes.map(recipe => {
           return (
             <Recipe
