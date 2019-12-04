@@ -38,13 +38,13 @@ export default function InputForm (props) {
     : setError({...error, ingredients: true})
   };
 
-  const getEditedRecipe = () => {
+  const getInput = () => {
     const {name , ingredients} = input;
 
     if (name === "" || ingredients === "") {
       handleErrors();
     } else {
-      props.editedRecipe(input);
+      props.handleInput(input);
       cancelEdit();
     }
   };
@@ -52,12 +52,12 @@ export default function InputForm (props) {
   return (
       <Dialog
         disableBackdropClick
-        disableEscapeKeyDown 
+        disableEscapeKeyDown
         open = { edit }
       >
       <DialogTitle>Fill the form</DialogTitle>
       <DialogContent>
-        <form className={classes.container}>;
+        <form className={classes.container}>
           <TextField
             id="standard-basic"
             className={classes.textFieldRecipeName}
@@ -93,8 +93,8 @@ export default function InputForm (props) {
         >
           Close
         </Button>
-        <Button 
-          onClick={getEditedRecipe}
+        <Button
+          onClick={getInput}
           variant="outlined"
           color="primary"
           className={classes.button}

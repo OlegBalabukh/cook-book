@@ -7,46 +7,35 @@ import '../../common/Recipe.css';
 
 const Recipe = (props) => {
   const classes = useStyles();
-  const { id, name, date, ingredients, isFocused, oldVersions } = props.recipe;
-  const { deleteRecipe, setActiveRecipe, addRecipe, saveRecipeVersion, updateRecipe } = props;
+  const { _id, id, name, date, ingredients, isFocused, oldVersions } = props.recipe;
+  const { deleteRecipe, setActiveRecipe, updateRecipe } = props;
 
   const [ edit, setEdit ] = useState(false);
   const [ showIngredients, setShowIngredients ] = useState(false);
 
-  const onEdit = () => {
-    setEdit(true)
-  }
+  const onEdit = () => setEdit(true);
 
   const handleEditedRecipe = (edited) => {
     setEdit(false);
+    const oldVersion = { id, name, ingredients, date, isFocused: false };    
+    const updated = { edited: {...edited, id: Date.now(), _id }, oldVersion };
+    updateRecipe(updated);
+  }
+  
+  const handleClose = () => setEdit(false);
+  const handleDelete = () => deleteRecipe(_id);
 
-    if ( edited.id !== id ) {
-      addRecipe(edited);
-    } else if (edited.ingredients !== ingredients) {
-      saveRecipeVersion(props.recipe)
-      updateRecipe(edited)
+  const handleShow = () => {
+    setActiveRecipe(id);
+    
+    if (!isFocused && !showIngredients) {
+      setShowIngredients(true)
+    } else if (isFocused === true) {
+      setShowIngredients(!showIngredients)
     }
   }
 
-  const handleClose = () => {
-    setEdit(false)
-  }
-
-  const handleDelete = () => {
-    deleteRecipe(id)
-  }
-
-  const handleShow = () => {
-    setActiveRecipe(id); 
-    
-    if (!isFocused && !showIngredients) {
-      setShowIngredients(true);
-    } else if (isFocused === true) {
-      setShowIngredients(!showIngredients);
-    }  
-  }
-
-  return (   
+  return (
     <div className="recipe" >
         <div className={ isFocused ? "focusRecipe" : "header"} onClick={ handleShow }>
           <h6 className="recipeName">{ name }
@@ -59,7 +48,7 @@ const Recipe = (props) => {
           </h6>
           <div className="date">{ date }</div>
         </div>
-        { isFocused && showIngredients &&  ( 
+        { isFocused && showIngredients && (
             <div className="ingredients">
               <div className="ingHeader">Ingredients</div>
               <ul>
@@ -84,13 +73,13 @@ const Recipe = (props) => {
                 >
                 DELETE</Button>
               </div>
-              { edit && 
+              { edit &&
                 <InputForm
                   id={id}
                   name={name}
                   edit={edit}
-                  ingredients={ingredients} 
-                  editedRecipe = {handleEditedRecipe}
+                  ingredients={ingredients}
+                  handleInput = {handleEditedRecipe}
                   cancelConfirmation = {handleClose}
                 />
               }

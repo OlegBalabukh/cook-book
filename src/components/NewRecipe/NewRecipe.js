@@ -41,7 +41,7 @@ export default function NewRecipe(props) {
           name={initInput.name}
           edit={edit}
           ingredients={initInput.ingredients}
-          editedRecipe = {handleNewRecipe}
+          handleInput = {handleNewRecipe}
           cancelConfirmation = {handleClose}
         />
       }

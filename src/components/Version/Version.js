@@ -6,13 +6,13 @@ import '../../common/Recipe.css';
 
 const Version = (props) => {
   const classes = useStyles();
-  const { id, date, ingredients, isFocused } = props.recipe;
-  const { deleteVersion, setActiveVersion } = props;
+  const { id, name, date, ingredients, isFocused } = props.recipe;
+  const { deleteVersion, setActiveVersion, _id } = props;
 
   const [ showIngredients, setShowIngredients ] = useState(false);
 
   const handleDelete = () => {
-    deleteVersion(id)
+    deleteVersion({_id, id})
   }
 
   const handleShow = () => {
@@ -27,7 +27,8 @@ const Version = (props) => {
   return (
     <div className="recipe" >
       <div className={ isFocused ? "focusVersion" : "header"} onClick={ handleShow }>
-        <h6 className="versionDate"> { date }</h6>
+        <h6 className="versionDate"> { name }</h6>
+        <div className="date">{ date }</div>
       </div>
       { isFocused && showIngredients && (
         <div className="ingredients">

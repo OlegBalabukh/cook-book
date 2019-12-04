@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 
 import NewRecipe from '../../components/NewRecipe/NewRecipe';
 import Recipe from '../../components/Recipe/Recipe';
 import Version from '../../components/Version/Version';
+import { getRecipesAction } from "./actions/getRecipes.action";
 import { addRecipeAction } from "./actions/addRecipe.action";
 import { deleteRecipeAction } from "./actions/deleteRecipe.action";
 import { setActiveRecipeAction } from "./actions/setActiveRecipe.action.js";
 import { updateRecipeAction} from "./actions/updateRecipe.action.js";
-import { saveRecipeVersionAction } from "./actions/saveRecipeVersion.action.js";
 import { setActiveVersionAction } from "./actions/setActiveVersion.action.js";
 import { deleteVersionAction } from "./actions/deleteVersion.action.js";
 
 import './App.css';
 
 function App(props) {
-  const { addRecipe, deleteRecipe, setActiveRecipe, updateRecipe } = props;
-  const { saveRecipeVersion, deleteVersion, setActiveVersion, recipes } = props;
+  const { getRecipes, addRecipe, deleteRecipe, setActiveRecipe, updateRecipe } = props;
+  const { deleteVersion, setActiveVersion, recipes } = props;
 
-  const focused = recipes.find(recipe => recipe.isFocused);  
+  const focused = recipes.find(recipe => recipe.isFocused);
+
+  useEffect(() => {
+    recipes.length === 0 && getRecipes();
+  }, [recipes, getRecipes]);
 
   return (
     <div className="app">
@@ -38,7 +42,6 @@ function App(props) {
               deleteRecipe={deleteRecipe}
               setActiveRecipe={setActiveRecipe}
               addRecipe={addRecipe}
-              saveRecipeVersion={saveRecipeVersion}
               updateRecipe={updateRecipe}
             />
           )
@@ -51,6 +54,7 @@ function App(props) {
               return (
                 <Version
                   key={version.id}
+                  _id = {focused._id}
                   recipe={version}
                   deleteVersion={deleteVersion}
                   setActiveVersion={setActiveVersion}
@@ -60,7 +64,6 @@ function App(props) {
           }
         </div>
       </div>
-        
     </div>
   );
 }
@@ -70,12 +73,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getRecipes: () => { dispatch(getRecipesAction()); },
   addRecipe: (newRecipe) => { dispatch(addRecipeAction(newRecipe)); },
   deleteRecipe: (id) => { dispatch(deleteRecipeAction(id)); },
   setActiveRecipe: (id) => { dispatch(setActiveRecipeAction(id)); },
   updateRecipe: (id) => { dispatch(updateRecipeAction(id)); },
-
-  saveRecipeVersion: (recipe) => { dispatch(saveRecipeVersionAction(recipe)); },
+  
   setActiveVersion: (id) => { dispatch(setActiveVersionAction(id)); },
   deleteVersion: (id) => { dispatch(deleteVersionAction(id)); },
 });
