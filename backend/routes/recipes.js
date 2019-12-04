@@ -25,6 +25,7 @@ router.route('/update/:id').post((req, res) => {
   Recipe.findById(req.params.id)
     .then(recipe => {
       recipe.id = Number(req.body.edited.id);
+      recipe.name = req.body.edited.name;
       recipe.ingredients = req.body.edited.ingredients;
       recipe.date = new Date(req.body.edited.id).toString().substr(0, 24);
       recipe.oldVersions.push(req.body.oldVersion);
@@ -42,7 +43,7 @@ router.route('/:id').delete((req, res) => {
 });
 
 router.route('/version/:id').post((req, res) => {
-  Recipe.update(
+  Recipe.updateOne(
     {"_id": req.params.id},
     { $pull: { "oldVersions" : { "id": req.body.id } } },
     { safe: true }
