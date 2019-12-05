@@ -11,6 +11,7 @@ export const recipesReducer = (state = [], {type, payload}) => {
   switch(type) {
 
     case GET_RECIPES:
+      console.log(payload);
       return payload.slice().reverse()
         .map(recipe => ({
           ...recipe,
